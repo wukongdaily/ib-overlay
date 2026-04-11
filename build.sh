@@ -114,7 +114,21 @@ fi
 # 可选参数FILES=files 代表files目录中若有文件 则覆盖openwrt的根目录 原样注入  
 # 例如files/etc对应覆盖openwrt系统/etc目录中的文件 
 # 例如files/mnt对应覆盖openwrt系统/mnt目录中的文件 
-OUTPUT_DIR=$(pwd)/output
-mkdir -p $OUTPUT_DIR
-make image PROFILE=generic PACKAGES="$PACKAGES"  FILES=files ROOTFS_PARTSIZE=2048 BIN_DIR=$OUTPUT_DIR
-ls -lah $OUTPUT_DIR
+#!/bin/bash
+
+# 输出目录
+OUTPUT_DIR="$(pwd)/output"
+
+# 创建目录（不存在才创建）
+mkdir -p "$OUTPUT_DIR"
+
+# 构建 OpenWrt 固件
+make image \
+  PROFILE="generic" \
+  PACKAGES="$PACKAGES" \
+  FILES="files" \
+  ROOTFS_PARTSIZE="2048" \
+  BIN_DIR="$OUTPUT_DIR"
+
+# 查看输出结果
+ls -lah "$OUTPUT_DIR"
