@@ -1,5 +1,5 @@
 # ib-overlay
-Custom overlay files and scripts for OpenWrt ImageBuilder 24.10.2
+Custom overlay files and scripts for OpenWrt ImageBuilder 25.10.2
 <br>
 此项目 只记录了我修改的文件和脚本，ImageBuilder工具包并不在其中.你可以把它当做模板,适当修改,就能定制属于自己的固件了<br>
 ### 目前本项目有关集成第三方插件的逻辑 也同步到了云端的ImageBuilder项目 希望对各位有所启发
@@ -11,9 +11,10 @@ https://github.com/wukongdaily/AutoBuildImmortalWrt
 ## 1、下载ImageBuilder
 ```
 # 下载
-wget https://mirrors.aliyun.com/openwrt/releases/24.10.2/targets/x86/64/openwrt-imagebuilder-24.10.2-x86-64.Linux-x86_64.tar.zst
+wget https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/25.12.2/targets/x86/64/openwrt-imagebuilder-25.12.2-x86-64.Linux-x86_64.tar.zst
 # 解压
-tar --use-compress-program=unzstd -xvf openwrt-imagebuilder-24.10.2-x86-64.Linux-x86_64.tar.zst
+tar --use-compress-program=unzstd -xvf openwrt-imagebuilder-25.12.2-x86-64.Linux-x86_64.tar.zst
+# 解压
 # 进入ImageBuilder目录
 cd openwrt-imagebuilder-24.10.2-x86-64.Linux-x86_64/
 ```
