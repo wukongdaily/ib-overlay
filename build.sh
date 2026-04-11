@@ -82,7 +82,7 @@ done
 PACKAGES="$BASE_PACKAGES $CUSTOM_PACKAGES"
 
 # 若构建openclash 则添加内核
-<!--if echo "$PACKAGES" | grep -q "luci-app-openclash"; then
+if echo "$PACKAGES" | grep -q "luci-app-openclash"; then
     echo "✅ [构建逻辑] 已选择 luci-app-openclash，添加 openclash core"
     mkdir -p files/etc/openclash/core
     if [ -f extra-packages/temp-unpack/clash_meta ]; then
@@ -93,11 +93,11 @@ PACKAGES="$BASE_PACKAGES $CUSTOM_PACKAGES"
 else
     echo "⚪️ [构建逻辑] 未选择 luci-app-openclash"
     [ -d files/etc/openclash ] && rm -rf files/etc/openclash
-fi-->
+fi
 
 
 # 若构建luci-app-adguardhome 则添加内核
-<!--if echo "$PACKAGES" | grep -q "luci-app-adguardhome"; then
+if echo "$PACKAGES" | grep -q "luci-app-adguardhome"; then
     echo "✅ [构建逻辑] 已选择 luci-app-adguardhome，添加 AdGuardHome core"
     if [ -f extra-packages/temp-unpack/AdGuardHome/AdGuardHome ]; then
         cp extra-packages/temp-unpack/AdGuardHome/AdGuardHome files/usr/bin/AdGuardHome
@@ -107,7 +107,7 @@ fi-->
 else
     echo "⚪️ [构建逻辑] 未选择 luci-app-adguardhome"
     [ -f files/usr/bin/AdGuardHome ] && rm -f files/usr/bin/AdGuardHome
-fi-->
+fi
 
 
 # 开始构建 软件包大小1024代表1GB 
