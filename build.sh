@@ -6,21 +6,56 @@
 # https://downloads.openwrt.org/releases/24.10.2/packages/x86_64/luci/
 # https://mirrors.aliyun.com/openwrt/releases/24.10.2/packages/x86_64/luci/
 BASE_PACKAGES=""
-BASE_PACKAGES="$BASE_PACKAGES curl"
-BASE_PACKAGES="$BASE_PACKAGES -dnsmasq"
-# 此处为什么勾选完整版dnsmasq-full 因为openclash需要该依赖 由于dnsmasq和dnsmasq-full 在安装上互斥 因此只能保留一个 减号代表去除
-BASE_PACKAGES="$BASE_PACKAGES dnsmasq-full"
-BASE_PACKAGES="$BASE_PACKAGES luci"
-BASE_PACKAGES="$BASE_PACKAGES bash"
-BASE_PACKAGES="$BASE_PACKAGES luci-i18n-ttyd-zh-cn"
-BASE_PACKAGES="$BASE_PACKAGES openssh-sftp-server"
-BASE_PACKAGES="$BASE_PACKAGES luci-i18n-package-manager-zh-cn"
-BASE_PACKAGES="$BASE_PACKAGES luci-compat"
-BASE_PACKAGES="$BASE_PACKAGES luci-i18n-firewall-zh-cn"
-BASE_PACKAGES="$BASE_PACKAGES luci-i18n-base-zh-cn"
-# 如果勾选了docker 务必保证软件包大小ROOTFS_PARTSIZE至少大于512 目前1024
-BASE_PACKAGES="$BASE_PACKAGES luci-i18n-dockerman-zh-cn"
-# 文件管理器
+# ==============================================================================
+# 1. 网络核心（替换dnsmasq为完整版，满足OpenClash依赖）
+# ==============================================================================
+BASE_PACKAGES="$BASE_PACKAGES curl"              # 网络下载工具
+BASE_PACKAGES="$BASE_PACKAGES -dnsmasq"          # 移除默认轻量DNS（与完整版互斥）
+BASE_PACKAGES="$BASE_PACKAGES dnsmasq-full"       # 安装完整版DNS（OpenClash强制依赖）
+
+# ==============================================================================
+# 2. 管理界面核心（LuCI 网页后台 + 中文语言）
+# ==============================================================================
+BASE_PACKAGES="$BASE_PACKAGES luci"              # 安装LuCI网页管理界面
+BASE_PACKAGES="$BASE_PACKAGES luci-base"         # LuCI 基础框架
+BASE_PACKAGES="$BASE_PACKAGES luci-compat"       # LuCI 兼容库（支持旧版插件）
+BASE_PACKAGES="$BASE_PACKAGES luci-i18n-base-zh-cn"       # LuCI 基础中文语言包
+BASE_PACKAGES="$BASE_PACKAGES luci-i18n-firewall-zh-cn"   # 防火墙中文语言包
+BASE_PACKAGES="$BASE_PACKAGES luci-i18n-package-manager-zh-cn" # 软件包管理器中文
+BASE_PACKAGES="$BASE_PACKAGES luci-i18n-ttyd-zh-cn"        # 网页终端中文语言包
+BASE_PACKAGES="$BASE_PACKAGES luci-i18n-dockerman-zh-cn"   # Docker管理器中文语言包
+BASE_PACKAGES="$BASE_PACKAGES luci-i18n-attendedsysupgrade-zh-cn" # 在线升级中文
+
+# ==============================================================================
+# 3. 系统工具（Shell、编辑器、证书）
+# ==============================================================================
+BASE_PACKAGES="$BASE_PACKAGES bash"              # 增强版Shell终端
+BASE_PACKAGES="$BASE_PACKAGES ca-bundle"         # 证书信任库（保证HTTPS正常）
+BASE_PACKAGES="$BASE_PACKAGES nano-full"         # 增强版文本编辑器
+BASE_PACKAGES="$BASE_PACKAGES openssh-sftp-server" # SFTP文件传输服务
+
+# ==============================================================================
+# 4. 磁盘/分区管理工具（挂载、扩容、查看）
+# ==============================================================================
+BASE_PACKAGES="$BASE_PACKAGES parted"            # 磁盘分区工具
+BASE_PACKAGES="$BASE_PACKAGES fdisk"             # 传统磁盘分区工具
+BASE_PACKAGES="$BASE_PACKAGES block-mount"       # 磁盘挂载管理
+BASE_PACKAGES="$BASE_PACKAGES resize2fs"         # EXT4分区在线扩容
+BASE_PACKAGES="$BASE_PACKAGES losetup"           # 回环设备管理
+BASE_PACKAGES="$BASE_PACKAGES blkid"             # 磁盘UUID查看
+BASE_PACKAGES="$BASE_PACKAGES lsblk"             # 磁盘列表查看工具
+
+# ==============================================================================
+# 5. 网络与压缩工具
+# ==============================================================================
+BASE_PACKAGES="$BASE_PACKAGES unzip"             # ZIP解压工具
+BASE_PACKAGES="$BASE_PACKAGES ss"                # 网络连接状态查看
+
+# ==============================================================================
+# 6. 扩展服务（AdGuard Home 广告过滤）
+# ==============================================================================
+BASE_PACKAGES="$BASE_PACKAGES adguardhome"       # 全局广告拦截 DNS服务
+
 BASE_PACKAGES="$BASE_PACKAGES luci-i18n-filemanager-zh-cn"
 # openlist用来平替alist 目前阿里云镜像仓库也有了
 #BASE_PACKAGES="$BASE_PACKAGES luci-i18n-openlist-zh-cn"
