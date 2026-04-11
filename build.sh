@@ -116,5 +116,5 @@ fi
 # 例如files/mnt对应覆盖openwrt系统/mnt目录中的文件 
 OUTPUT_DIR=$(pwd)/output
 mkdir -p $OUTPUT_DIR
-make image PROFILE=generic PACKAGES="$PACKAGES"  FILES=files ROOTFS_PARTSIZE=1024 BIN_DIR=$OUTPUT_DIR
+make image PROFILE=generic PACKAGES="$PACKAGES"  FILES=files ROOTFS_PARTSIZE=2048 BIN_DIR=$OUTPUT_DIR
 ls -lah $OUTPUT_DIR
