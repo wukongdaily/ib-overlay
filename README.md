@@ -16,7 +16,7 @@ wget https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/25.12.2/targets/x86/6
 tar --use-compress-program=unzstd -xvf openwrt-imagebuilder-25.12.2-x86-64.Linux-x86_64.tar.zst
 # 解压
 # 进入ImageBuilder目录
-cd openwrt-imagebuilder-24.10.2-x86-64.Linux-x86_64/
+cd openwrt-imagebuilder-25.12.2-x86-64.Linux-x86_64/
 ```
 
 ## 定位到ImageBuilder的根目录下
