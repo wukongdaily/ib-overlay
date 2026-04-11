@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # 先执行 prepare-packages.sh 此脚本用于拷贝所有自定义ipk到packages目录
-sh prepare-packages.sh
+# sh prepare-packages.sh
 # 以下是仓库内的包名 你可以在openwrt官网仓库查询插件名称
 # https://downloads.openwrt.org/releases/24.10.2/packages/x86_64/luci/
 # https://mirrors.aliyun.com/openwrt/releases/24.10.2/packages/x86_64/luci/
@@ -33,16 +33,16 @@ BASE_PACKAGES="$BASE_PACKAGES luci-i18n-p910nd-zh-cn"
 
 # 下面是自定义的包 你可以用#注释掉不需要的包 也可以添加更多的包 
 # 使用条件:在extra-packages下放置了相关run或者ipk
-CUSTOM_PACKAGES=""
+#CUSTOM_PACKAGES=""
 # 第三方插件 文件传输 luci-app-filetransfer
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-lib-fs"
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-lua-runtime"
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-filetransfer"
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-filetransfer-zh-cn"
+#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-lib-fs"
+#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-lua-runtime"
+#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-filetransfer"
+#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-filetransfer-zh-cn"
 # 第三方插件 argon主题 luci-theme-argon 紫色主题 3个ipk
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-theme-argon"
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-argon-config-zh-cn"
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-argon-config"
+#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-theme-argon"
+#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-argon-config-zh-cn"
+#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-argon-config"
 
 # 第三方插件 istore 应用商店
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-store"
@@ -82,7 +82,7 @@ done
 PACKAGES="$BASE_PACKAGES $CUSTOM_PACKAGES"
 
 # 若构建openclash 则添加内核
-if echo "$PACKAGES" | grep -q "luci-app-openclash"; then
+<!--if echo "$PACKAGES" | grep -q "luci-app-openclash"; then
     echo "✅ [构建逻辑] 已选择 luci-app-openclash，添加 openclash core"
     mkdir -p files/etc/openclash/core
     if [ -f extra-packages/temp-unpack/clash_meta ]; then
@@ -93,11 +93,11 @@ if echo "$PACKAGES" | grep -q "luci-app-openclash"; then
 else
     echo "⚪️ [构建逻辑] 未选择 luci-app-openclash"
     [ -d files/etc/openclash ] && rm -rf files/etc/openclash
-fi
+fi-->
 
 
 # 若构建luci-app-adguardhome 则添加内核
-if echo "$PACKAGES" | grep -q "luci-app-adguardhome"; then
+<!--if echo "$PACKAGES" | grep -q "luci-app-adguardhome"; then
     echo "✅ [构建逻辑] 已选择 luci-app-adguardhome，添加 AdGuardHome core"
     if [ -f extra-packages/temp-unpack/AdGuardHome/AdGuardHome ]; then
         cp extra-packages/temp-unpack/AdGuardHome/AdGuardHome files/usr/bin/AdGuardHome
@@ -107,7 +107,7 @@ if echo "$PACKAGES" | grep -q "luci-app-adguardhome"; then
 else
     echo "⚪️ [构建逻辑] 未选择 luci-app-adguardhome"
     [ -f files/usr/bin/AdGuardHome ] && rm -f files/usr/bin/AdGuardHome
-fi
+fi-->
 
 
 # 开始构建 软件包大小1024代表1GB 
